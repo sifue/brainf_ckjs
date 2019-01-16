@@ -19,7 +19,7 @@ for (let i = 0; i < code.length; i++) {
     process.stdout.write(String.fromCharCode(mem[ptr]));
   } else if (c === ',') {
     const input = require('fs').readFileSync('/dev/stdin', 'utf8');
-    mem[ptr] = input.charAt(0);
+    mem[ptr] = input.codePointAt(0);
   } else if (c === '[') {
     if (mem[ptr] === 0) {
       while (code.charAt(i) !== ']') i++;
