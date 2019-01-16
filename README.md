@@ -1,5 +1,5 @@
-# BrainF ck JS
-Node.js の BrainF ck の実装
+# BrainF\*ck JS
+Node.js の BrainF\*ck の実装
 
 ```
 node index.js "${code}"
