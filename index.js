@@ -7,6 +7,8 @@ let ptr = 0;
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
 
+const stack = [];
+
 async function main() {
   for (let i = 0; i < code.length; i++) {
     const c = code.charAt(i);
@@ -32,13 +34,29 @@ async function main() {
         });
       });
     } else if (c === '[') {
-      if (mem[ptr] === 0) {
-        while (code.charAt(i) !== ']') i++;
+      let j = i;
+      while (mem[ptr] === 0) {
+        if (code.charAt(j) === '[') {
+          stack.push(true);
+        } else if (code.charAt(j) === ']') {
+          stack.pop();
+        }
+        if (stack.length === 0) break;
+        j++;
       }
+      i = j;
     } else if (c === ']') {
-      if (mem[ptr] !== 0) {
-        while (code.charAt(i) !== '[') i--;
+      let j = i;
+      while (mem[ptr] !== 0) {
+        if (code.charAt(j) === ']') {
+          stack.push(true);
+        } else if (code.charAt(j) === '[') {
+          stack.pop();
+        }
+        if (stack.length === 0) break;
+        j--;
       }
+      i = j;
     }
   }
 }
